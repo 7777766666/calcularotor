@@ -2,11 +2,12 @@ plugins {
     kotlin("jvm") version "2.2.10"
     kotlin("plugin.spring") version "2.2.10"
     `maven-publish` // Для публикации библиотеки
+    java
 
 }
 
 group = "ru.calc"
-version = "1.0.0"
+version = "1.0.7"
 
 //java {
 //    toolchain {
@@ -20,6 +21,7 @@ repositories {
 }
 
 dependencies {
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:2.2.10"))
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
 //    implementation("org.slf4j:slf4j-api:2.0.7")
@@ -40,8 +42,16 @@ kotlin {
 
 publishing {
     publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
+        create<MavenPublication>("mavenJava") {
+            // Попробуйте использовать задачу jar, которую мы настроили
+            artifact(tasks.jar)
+            // Или альтернативно: from(components["java"])
         }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
