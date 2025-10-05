@@ -6,13 +6,13 @@ plugins {
 }
 
 group = "ru.calc"
-version = "1.0"
+version = "1.0.0"
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-    }
-}
+//java {
+//    toolchain {
+//        languageVersion.set(JavaLanguageVersion.of(17))
+//    }
+//}
 
 repositories {
     mavenCentral()
